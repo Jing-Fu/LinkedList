@@ -7,8 +7,9 @@ namespace LinkedList
 {
     public class ListNode
     {
-        public int data;
-        public ListNode nextNode = null;
+        public int data { get; set; }
+        public ListNode nextNode;
+
         public ListNode(int data)
         {
             this.data = data;
@@ -84,6 +85,28 @@ namespace LinkedList
                 previousNode.nextNode = currentNode.nextNode;
                 currentNode = null;
             }
+        }
+
+        public void Reverse()
+        {
+            if (rootNode == null || currentNode.nextNode == null)
+            {
+                return;
+            }
+
+            ListNode currentNode = rootNode;
+            ListNode prevNode = null;
+            ListNode frontNode = currentNode.nextNode;
+            while (frontNode != null)
+            {
+                currentNode.nextNode = prevNode;
+                prevNode = currentNode;
+                currentNode = frontNode;
+                frontNode = currentNode.nextNode;
+            }
+
+            currentNode.nextNode = prevNode;
+            rootNode = currentNode;
         }
     }
 }
